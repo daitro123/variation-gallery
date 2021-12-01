@@ -1,6 +1,6 @@
-# Variation Gallery
+# Variation Gallery for WooCommerce
 
-Allows to add multiple images to a product variation
+Allows to add multiple images to a product variation in WooCommerce plugin for Wordpress
 
 ## Contributing
 

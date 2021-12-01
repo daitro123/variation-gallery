@@ -25,6 +25,9 @@
 		return idArray;
 	}
 
+	/**
+	 * Eventlistener for Add images button
+	 */
 	$("body").on("click", ".vg-upload", function (e) {
 		e.preventDefault();
 
@@ -62,6 +65,9 @@
 			.open();
 	});
 
+	/**
+	 * Eventlistener for remove image button
+	 */
 	$("body").on("click", "span.variation-gallery__remove-image-btn", function (e) {
 		const imageToRemove = $(e.target).closest("li.variation-gallery__image-wrapper");
 		const gallery = $(e.target).closest(".variation-gallery");
@@ -72,4 +78,20 @@
 			updateIDs(galleryImageContainer);
 		});
 	});
+
+	/**
+	 * Runs when variations are loaded - applies sortable
+	 */
+	$("#woocommerce-product-data").on("woocommerce_variations_loaded", variations_loaded);
+
+	function variations_loaded() {
+		$(".variation-gallery__images").sortable({
+			stop: function (event, ui) {
+				const gallery = $(event.target).closest(".variation-gallery");
+				const galleryImageContainer = gallery.find(".variation-gallery__images");
+
+				updateIDs(galleryImageContainer);
+			},
+		});
+	}
 })(jQuery);

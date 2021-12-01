@@ -70,7 +70,7 @@ class VariationGallery
         <div class="<?php echo $fields['wrapper_class'] ?>" data-loop="<?php echo $fields['loop'] ?>">
             <p class="label"><?php _e('Variation Gallery'); ?></p>
             <div class="variation-gallery__wrapper">
-                <ul class="variation-gallery__images">
+                <ul class="variation-gallery__images ui-sortable">
 
                     <?php if ($fields['value']) : $id_array = explode(',', $fields['value']);
                         foreach ($id_array as $id) { ?>
