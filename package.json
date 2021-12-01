@@ -1,0 +1,11 @@
+{
+  "name": "variation-gallery",
+  "version": "0.0.1",
+  "description": "Adds option to attach images to product variations in woocommerce",
+  "main": "variation-gallery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomas Macek",
+  "license": "ISC"
+}
