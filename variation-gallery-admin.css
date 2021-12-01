@@ -20,13 +20,13 @@
 	display: block;
 }
 
-.variation-gallery__image-wrapper img:hover ~ .variation-gallery__remove-image-btn,
-.variation-gallery__remove-image-btn:hover,
-.variation-gallery__remove-image-btn span:hover {
+.variation-gallery__image-wrapper img:hover ~ .variation-gallery__remove-image-container,
+.variation-gallery__remove-image-container:hover,
+.variation-gallery__remove-image-container span:hover {
 	display: block;
 }
 
-.variation-gallery__remove-image-btn {
+.variation-gallery__remove-image-container {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -41,10 +41,11 @@
 	border: 2px solid #fff;
 }
 
-.variation-gallery__remove-image-btn span {
+.variation-gallery__remove-image-container span {
 	color: white;
+	cursor: pointer;
 }
 
-.variation-gallery__remove-image-btn:hover {
+.variation-gallery__remove-image-container:hover {
 	background-color: darkred;
 }

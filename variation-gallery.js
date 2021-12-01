@@ -1,4 +1,9 @@
 (function ($) {
+	/**
+	 * Updates IDs of currently existing images in gallery
+	 * @param {Object} galleryImageContainer
+	 * @returns int idArray
+	 */
 	function updateIDs(galleryImageContainer) {
 		// array with image IDs
 		const idArray = [];
@@ -57,5 +62,14 @@
 			.open();
 	});
 
-	$(".");
+	$("body").on("click", "span.variation-gallery__remove-image-btn", function (e) {
+		const imageToRemove = $(e.target).closest("li.variation-gallery__image-wrapper");
+		const gallery = $(e.target).closest(".variation-gallery");
+		const galleryImageContainer = gallery.find(".variation-gallery__images");
+
+		imageToRemove.fadeOut(300, function () {
+			$(this).remove();
+			updateIDs(galleryImageContainer);
+		});
+	});
 })(jQuery);

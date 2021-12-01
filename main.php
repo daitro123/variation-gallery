@@ -8,7 +8,6 @@ Author URI: https://www.tomasmacek.eu
 */
 
 
-
 class VariationGallery
 {
     public function __construct()
@@ -34,12 +33,21 @@ class VariationGallery
         }
     }
 
+
+    /**
+     * Receives data from woocommerce_product_after_variable_attributes hooks and sends fields
+     *
+     * @param int $loop
+     * @param object $variation_data
+     * @param object $variation
+     * @return void
+     */
     public function variation_settings_fields($loop, $variation_data, $variation)
     {
         $this->variation_gallery_HTML(
             array(
-                'id'            => "variation-gallery{$loop}",
-                'name'          => "variation-gallery[{$loop}]",
+                'id'            => "variation_gallery{$loop}",
+                'name'          => "variation_gallery[{$loop}]",
                 'value'         => get_post_meta($variation->ID, 'variation_gallery', true),
                 'label'         => __('Variation gallery'),
                 'desc_tip'      => true,
@@ -50,6 +58,12 @@ class VariationGallery
         );
     }
 
+    /**
+     * Generated admin HTML based on passed fields
+     *
+     * @param array $fields
+     * @return void
+     */
     public function variation_gallery_HTML($fields)
     {
 ?>
@@ -79,6 +93,13 @@ class VariationGallery
 <?php
     }
 
+    /**
+     * Saves the field
+     *
+     * @param int $variation_id
+     * @param int $loop
+     * @return void
+     */
     public function save_variation_gallery($variation_id, $loop)
     {
         $inputValue = $_POST['variation_gallery'][$loop];
@@ -87,13 +108,25 @@ class VariationGallery
             update_post_meta($variation_id, 'variation_gallery', esc_attr($inputValue));
         }
     }
-
-    public function load_variation_gallery($variation)
-    {
-        $variation['variation_gallery'] = get_post_meta($variation['variation_id'], 'variation_gallery', true);
-
-        return $variation;
-    }
 }
 
 $variationGallery = new VariationGallery();
+
+
+/**
+ * Get all images in variation gallery based on variation id
+ *
+ * @param int $variation_id
+ * @param string $size
+ * @return array $imageURLArray
+ */
+function get_variation_gallery_images($variation_id, $size = "thumbnail")
+{
+    $imageIDs = explode(',', get_post_meta($variation_id, 'variation_gallery', true));
+
+    foreach ($imageIDs as $singleImage) {
+        $imageURLArray[] = wp_get_attachment_image_src($singleImage, $size)[0];
+    }
+
+    return $imageURLArray;
+}
