@@ -2,11 +2,14 @@
 /*
 Plugin Name: Woo Variation Gallery plugin
 Description: Adding gallery to product variations in woocommerce
-Version: 0.1
+Version: 0.2
 Author: Tomas Macek
 Author URI: https://www.tomasmacek.eu
 */
 
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class VariationGallery
 {
@@ -21,15 +24,15 @@ class VariationGallery
         add_action('woocommerce_save_product_variation', [$this, 'save_variation_gallery'], 10, 2);
         add_filter('woocommerce_available_variation', [$this, 'load_variation_gallery']);
 
-        // scripts
+        // scripts and styles
         add_action('admin_enqueue_scripts', [$this, 'loadScriptsAndStyles']);
     }
 
     public function loadScriptsAndStyles()
     {
         if (is_admin() && isset($_GET['post']) && get_post_type($_GET['post']) == "product") {
-            wp_enqueue_script('variation-gallery', plugins_url(basename(plugin_dir_path(__FILE__)) . '/variation-gallery.js', basename(__FILE__)), ['jquery'], null, true);
-            wp_enqueue_style('admin-styles', plugins_url(basename(plugin_dir_path(__FILE__)) . '/variation-gallery-admin.css'));
+            wp_enqueue_script('variation-gallery', plugins_url(basename(plugin_dir_path(__FILE__)) . '/assets/dist/variation-gallery.min.js', basename(__FILE__)), ['jquery'], null, true);
+            wp_enqueue_style('admin-styles', plugins_url(basename(plugin_dir_path(__FILE__)) . '/assets/dist/variation-gallery-admin.min.css'));
         }
     }
 

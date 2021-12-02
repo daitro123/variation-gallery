@@ -86,6 +86,14 @@
 
 	function variations_loaded() {
 		$(".variation-gallery__images").sortable({
+			items: "li.variation-gallery__image-wrapper",
+			cursor: "move",
+			scrollSensitivity: 40,
+			forcePlaceholderSize: true,
+			forceHelperSize: false,
+			helper: "clone",
+			opacity: 0.65,
+			placeholder: "wc-metabox-sortable-placeholder",
 			stop: function (event, ui) {
 				const gallery = $(event.target).closest(".variation-gallery");
 				const galleryImageContainer = gallery.find(".variation-gallery__images");
